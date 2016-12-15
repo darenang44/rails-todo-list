@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:show, :edit, :update, :destroy]
+  before_action :find_task, only: [:show, :edit, :update, :destroy, :complete]
 
   def index
     # @tasks = Task.all.order('created_at DESC')
@@ -46,6 +46,16 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
+    redirect_to root_path
+  end
+
+  # this method is to mark the task completed
+  # in the task model we created a method that will check if the completed_at attribute is blank
+  def complete
+    # the before_action is going to find the specific task for us
+    # then we are going to update the :completed_at attribute with the current time
+    @task.update_attribute(:completed_at, Time.now)
+    # then we want to redirect_to the home page
     redirect_to root_path
   end
 
