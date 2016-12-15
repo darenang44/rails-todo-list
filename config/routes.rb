@@ -35,4 +35,6 @@ Rails.application.routes.draw do
 #           PUT    /tasks/:id(.:format)      tasks#update
 #           DELETE /tasks/:id(.:format)      tasks#destroy
 #       root GET    /                         tasks#index
+
+# complete_task PATCH  /tasks/:id/complete(.:format)  tasks#complete
 end
