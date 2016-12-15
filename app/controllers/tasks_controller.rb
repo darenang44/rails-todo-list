@@ -2,7 +2,11 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order('created_at DESC')
+    # @tasks = Task.all.order('created_at DESC')
+    if user_signed_in?
+      # to add restrictions we only want to show tasks that belong to the current user
+      @tasks = Task.where(user_id: current_user.id).order('created_at DESC')
+    end
   end
 
   def show

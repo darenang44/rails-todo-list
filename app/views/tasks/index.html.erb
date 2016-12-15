@@ -2,8 +2,13 @@
 <% description "Placeholder description." %>
 <% keywords "Placeholder keywords" %>
 
-<% @tasks.each do |task| %>
-  <h2><%= link_to task.title, task %></h2>
-  <p><%= task.description %></p>
-  <p>Created <%= time_ago_in_words(task.created_at) %> ago</p>
+
+<% if user_signed_in? %>
+  <% @tasks.each do |task| %>
+    <h2><%= link_to task.title, task %></h2>
+    <p><%= task.description %></p>
+    <p>Created <%= time_ago_in_words(task.created_at) %> ago</p>
+  <% end %>
+<% else %>
+  <%= render "welcome_page" %>
 <% end %>
